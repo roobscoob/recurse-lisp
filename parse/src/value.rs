@@ -6,7 +6,5 @@ pub enum Value {
     Integer(i64),
     String(String),
     List(List),
-
-    // i don't super understand symbols so this is probably wrong :(
     Symbol(Box<Value>),
 }

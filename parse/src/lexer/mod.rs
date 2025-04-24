@@ -1,28 +1,23 @@
 use logos::Logos;
 
 #[derive(Logos, Debug, PartialEq)]
+#[logos(skip r"[ \t\n\f]+")]
 pub enum Token<'a> {
-    #[token("(", priority = 4)]
+    #[token("(", priority = 5)]
     ListOpen,
 
-    #[token(")", priority = 4)]
+    #[token(")", priority = 5)]
     ListClose,
 
-    #[token("'", priority = 4)]
+    #[token("'", priority = 5)]
     Quote,
 
-    #[token("false", priority = 4)]
-    BooleanFalse,
-
-    #[token("true", priority = 4)]
-    BooleanTrue,
-
-    #[regex("-?[0-9]+", priority = 3)]
+    #[regex(r"-?[0-9]+", priority = 4)]
     Number(&'a str),
 
-    #[regex("\"[^\"]*\"", priority = 3)]
+    #[regex("\"[^\"]*\"", priority = 4)]
     String(&'a str),
 
-    #[regex("[^ ]+", priority = 2)]
+    #[regex(r"[^ \(\)]+", priority = 3)]
     Identifier(&'a str),
 }
